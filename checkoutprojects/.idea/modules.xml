@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FernFlower/FernFlower.iml" filepath="$PROJECT_DIR$/FernFlower/FernFlower.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkoutprojects4Defects4j.iml" filepath="$PROJECT_DIR$/checkoutprojects4Defects4j.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,13 +1,16 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class main {
+public class CheckoutMain {
+	static String path="/Users/chixiaye/bysj/code/GrowingBugRepository/framework/bug-mining/bug_mining_projects_info.txt";
+	static String defects4jPath="/home/cxy/GrowingBugRepository/framework/bin";
     public static void main(String[] args) throws Exception {
-        String path="/Users/chixiaye/bysj/code/GrowingBugRepository/framework/bug-mining/bug_mining_projects_info.txt";
-        String outputPath="/Users/chixiaye/paper/checkout-4j";
-        ArrayList<ArrayList<String> > list = getProjectList(path);
-
+    	 String outputPath="/Users/chixiaye/paper/checkout-4j";
+         ArrayList<ArrayList<String> > list = getProjectList(path);
         //for(int i=0;i<list.get(0).size();i++){
         for(int i=0;i<=0;i++){
             String projectName=list.get(0).get(i);
@@ -28,7 +31,7 @@ public class main {
             Process p1=null;
             try {
                 String cmd0 = "source ~/.bash_profile"; //depend on the os
-                String cmd1 ="export PATH=$PATH:/Users/chixiaye/bysj/code/GrowingBugRepository/framework/bin";
+                String cmd1 ="export PATH=$PATH:"+defects4jPath;
                 String cmd2 ="cd "+outputPath+"/"+projectName;
                 String cmd3="defects4j checkout -p "+projectName+" -v "+i+"b -w "+projectName+"_"+i+" -s "+subProjectName;
                 String cmd4="cd "+projectName+"_"+i+"/"+subProjectName;
@@ -43,12 +46,12 @@ public class main {
                 status = p1.waitFor();
                 System.out.println(cmd3);
 
-                p1 = r1.exec("ls "+"/Users/chixiaye/paper/checkout-4j/"+projectName+"/"+projectName+"_"+i+"/"+subProjectName+"/all_tests ");
+                p1 = r1.exec("ls "+outputPath+"/"+projectName+"/"+projectName+"_"+i+"/"+subProjectName+"/all_tests ");
                 status = p1.waitFor();
                 if(status != 0){
                     //System.err.println("Failed to call cmd and the return status's is: " + status);
                     System.err.println(projectName+"_"+i+" failed! ");
-                    p1 = r1.exec("rm -rf "+"/Users/chixiaye/paper/checkout-4j/"+projectName+"/"+projectName+"_"+i);
+                    p1 = r1.exec("rm -rf "+outputPath+"/"+projectName+"/"+projectName+"_"+i);
                     status = p1.waitFor();
                 }
                 else{
